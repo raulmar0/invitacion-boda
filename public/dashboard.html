@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Boda | Maritza & Jaime</title>
+    <title>Panel de Boda</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,15 +39,22 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Password Modal -->
-    <div id="password-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 z-50 flex items-center justify-center p-4">
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-lg shadow-xl max-w-sm w-full p-8">
-            <h3 class="font-serif text-2xl text-black mb-4">Acceso Restringido</h3>
-            <p class="text-gray-600 mb-6">Por favor, introduce la contraseña para acceder al panel de administración.</p>
-            <form id="password-form">
-                <input type="password" id="password-input" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" placeholder="Contraseña">
-                <p id="password-error" class="text-red-500 text-sm mt-2 hidden">Contraseña incorrecta.</p>
-                <button type="submit" class="mt-4 w-full bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800">Entrar</button>
+            <h3 class="font-serif text-2xl text-black mb-4">Acceso al Panel</h3>
+            <p class="text-gray-600 mb-6">Inicia sesión para administrar las invitaciones.</p>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label for="email-input" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                    <input type="email" id="email-input" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" required>
+                </div>
+                <div>
+                    <label for="password-input" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                    <input type="password" id="password-input" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" required>
+                </div>
+                <p id="login-error" class="text-red-500 text-sm hidden">Correo o contraseña incorrectos.</p>
+                <button type="submit" id="login-btn" class="w-full bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800 disabled:bg-gray-400">Entrar</button>
             </form>
         </div>
     </div>
@@ -55,104 +62,113 @@
     <!-- Main Dashboard Content (hidden by default) -->
     <div id="dashboard-content" class="hidden">
         <header class="bg-white shadow-sm">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold font-serif text-gray-900">Panel de Boda de Maritza & Jaime</h1>
+            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <h1 class="text-2xl md:text-3xl font-bold font-serif text-gray-900">Panel de Boda</h1>
+                <button id="logout-btn" class="text-sm text-gray-600 hover:text-black underline">Cerrar Sesión</button>
             </div>
+            <nav class="border-b border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex space-x-8">
+                        <button id="tab-invitations" class="tab-btn border-b-2 border-black py-4 px-1 text-sm font-medium text-gray-900">Lista de Invitados</button>
+                        <button id="tab-details" class="tab-btn border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Detalles del Evento</button>
+                    </div>
+                </div>
+            </nav>
         </header>
 
         <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <!-- Stats Section -->
-            <section id="stats-section">
-                <h2 class="text-2xl font-semibold mb-4 px-4 sm:px-0">Resumen de Invitados</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                        <p class="text-4xl font-bold text-blue-600" id="total-guests">0</p>
-                        <p class="text-gray-500 mt-1">Total de Invitaciones</p>
+            <!-- Invitations View -->
+            <div id="view-invitations">
+                <!-- Stats Section -->
+                <section id="stats-section">
+                    <h2 class="text-2xl font-semibold mb-4 px-4 sm:px-0">Resumen de Invitados</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center"><p class="text-4xl font-bold text-blue-600" id="total-invitations">0</p><p class="text-gray-500 mt-1">Total de Invitaciones</p></div>
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center"><p class="text-4xl font-bold text-blue-800" id="total-passes">0</p><p class="text-gray-500 mt-1">Total de Invitados (Pases)</p></div>
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center"><p class="text-4xl font-bold text-green-600" id="total-confirmed-guests">0</p><p class="text-gray-500 mt-1">Invitados Confirmados</p></div>
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center"><p class="text-4xl font-bold text-green-800" id="confirmed-invitations">0</p><p class="text-gray-500 mt-1">Invitaciones Confirmadas</p></div>
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center"><p class="text-4xl font-bold text-orange-600" id="incomplete-confirmations">0</p><p class="text-gray-500 mt-1">Confirmaciones Incompletas</p></div>
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center"><p class="text-4xl font-bold text-yellow-600" id="pending-invitations">0</p><p class="text-gray-500 mt-1">Invitaciones Pendientes</p></div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                        <p class="text-4xl font-bold text-green-600" id="confirmed-guests">0</p>
-                        <p class="text-gray-500 mt-1">Confirmados</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                        <p class="text-4xl font-bold text-yellow-600" id="pending-guests">0</p>
-                        <p class="text-gray-500 mt-1">Pendientes</p>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Add Guest Section -->
-            <section id="add-guest-section" class="mt-12">
-                <h2 class="text-2xl font-semibold mb-4 px-4 sm:px-0">Agregar Nueva Invitación</h2>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <form id="add-guest-form" class="space-y-4">
-                        <div>
-                            <label for="guest-names" class="block text-sm font-medium text-gray-700">Nombres de los invitados</label>
-                            <input type="text" id="guest-names" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" placeholder="Ej: Ana López, Carlos García (separados por coma)" required>
-                            <p class="text-xs text-gray-500 mt-1">Si es más de un invitado, sepáralos por comas.</p>
-                        </div>
-                        <div>
-                            <label for="passes-allocated" class="block text-sm font-medium text-gray-700">Número de pases</label>
-                            <input type="number" id="passes-allocated" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" min="1" required>
-                        </div>
-                        <button type="submit" id="add-guest-btn" class="w-full sm:w-auto bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800 disabled:bg-gray-400">Agregar Invitado</button>
-                    </form>
-                </div>
-            </section>
+                <!-- Add Guest Section -->
+                <section id="add-guest-section" class="mt-12">
+                    <h2 class="text-2xl font-semibold mb-4 px-4 sm:px-0">Agregar Nueva Invitación</h2>
+                    <div class="bg-white p-6 rounded-lg shadow-md"><form id="add-guest-form" class="space-y-4"><div><label for="guest-names" class="block text-sm font-medium text-gray-700">Nombres de los invitados</label><input type="text" id="guest-names" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="Ej: Ana López, Carlos García (separados por coma)" required><p class="text-xs text-gray-500 mt-1">Si es más de un invitado, sepáralos por comas.</p></div><div><label for="passes-allocated" class="block text-sm font-medium text-gray-700">Número de pases</label><input type="number" id="passes-allocated" class="mt-1 w-full p-3 border border-gray-300 rounded-md" min="1" required></div><button type="submit" id="add-guest-btn" class="w-full sm:w-auto bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800 disabled:bg-gray-400">Agregar Invitado</button></form></div>
+                </section>
 
-            <!-- Guest List Section -->
-            <section id="guest-list-section" class="mt-12">
-                <h2 class="text-2xl font-semibold mb-4 px-4 sm:px-0">Lista de Invitados</h2>
-                <div id="guest-list-container" class="space-y-4">
-                    <div id="list-loader" class="flex justify-center items-center h-32">
-                        <div class="loader"></div>
+                <!-- Guest List Section -->
+                <section id="guest-list-section" class="mt-12"><h2 class="text-2xl font-semibold mb-4 px-4 sm:px-0">Lista de Invitados</h2><div id="guest-list-container" class="space-y-4"><div id="list-loader" class="flex justify-center items-center h-32"><div class="loader"></div></div></div></section>
+            </div>
+
+            <!-- Event Details View -->
+            <div id="view-details" class="hidden">
+                 <form id="event-details-form" class="space-y-8 bg-white p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold mb-4">Editar Detalles del Evento</h2>
+                    
+                    <!-- Names -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-b pb-8">
+                        <div><label for="edit-couple-names" class="block text-sm font-medium text-gray-700">Nombres de los Novios</label><input type="text" id="edit-couple-names" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="Maritza Hernández & Jaime Favela"></div>
+                        <div><label for="edit-welcome-phrase" class="block text-sm font-medium text-gray-700">Frase de Bienvenida</label><input type="text" id="edit-welcome-phrase" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="Dos almas, un solo camino..."></div>
+                        <div><label for="edit-bride-parents" class="block text-sm font-medium text-gray-700">Padres de la Novia</label><input type="text" id="edit-bride-parents" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="Maritza De la Cruz & Raul Hernández"></div>
+                        <div><label for="edit-groom-parents" class="block text-sm font-medium text-gray-700">Padres del Novio</label><input type="text" id="edit-groom-parents" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="Silvia Rodríguez & Javier Favela"></div>
                     </div>
-                    <!-- Guest cards will be inserted here -->
-                </div>
-            </section>
+
+                    <!-- Event Info -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-b pb-8">
+                        <div><label for="edit-wedding-date" class="block text-sm font-medium text-gray-700">Fecha de la Boda</label><input type="text" id="edit-wedding-date" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="SÁBADO, 17 DE OCTUBRE DE 2026"></div>
+                        <div><label for="edit-photo-url" class="block text-sm font-medium text-gray-700">URL de la Foto Principal</label><input type="url" id="edit-photo-url" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="https://..."></div>
+                    </div>
+
+                    <!-- Locations -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-b pb-8">
+                        <div class="space-y-4">
+                            <h3 class="font-semibold text-lg">Ceremonia</h3>
+                            <div><label for="edit-ceremony-name" class="block text-sm font-medium text-gray-700">Nombre del Lugar</label><input type="text" id="edit-ceremony-name" class="mt-1 w-full p-3 border border-gray-300 rounded-md"></div>
+                            <div><label for="edit-ceremony-time" class="block text-sm font-medium text-gray-700">Hora</label><input type="text" id="edit-ceremony-time" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="5:00 PM"></div>
+                            <div><label for="edit-ceremony-maps" class="block text-sm font-medium text-gray-700">Link de Google Maps</label><input type="url" id="edit-ceremony-maps" class="mt-1 w-full p-3 border border-gray-300 rounded-md"></div>
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="font-semibold text-lg">Recepción</h3>
+                            <div><label for="edit-reception-name" class="block text-sm font-medium text-gray-700">Nombre del Lugar</label><input type="text" id="edit-reception-name" class="mt-1 w-full p-3 border border-gray-300 rounded-md"></div>
+                            <div><label for="edit-reception-time" class="block text-sm font-medium text-gray-700">Hora</label><input type="text" id="edit-reception-time" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="7:00 PM"></div>
+                            <div><label for="edit-reception-maps" class="block text-sm font-medium text-gray-700">Link de Google Maps</label><input type="url" id="edit-reception-maps" class="mt-1 w-full p-3 border border-gray-300 rounded-md"></div>
+                        </div>
+                    </div>
+
+                    <!-- Itinerary -->
+                    <div class="border-b pb-8">
+                        <h3 class="font-semibold text-lg mb-4">Itinerario</h3>
+                        <div id="itinerary-editor" class="space-y-4"></div>
+                        <button type="button" id="add-itinerary-item-btn" class="mt-4 text-sm font-semibold text-blue-600 hover:text-blue-800">+ Agregar Actividad</button>
+                    </div>
+                    
+                    <!-- Gift Registry -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><label for="edit-gift1-name" class="block text-sm font-medium text-gray-700">Nombre Tienda 1</label><input type="text" id="edit-gift1-name" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="Liverpool"></div>
+                        <div><label for="edit-gift1-link" class="block text-sm font-medium text-gray-700">Link Tienda 1</label><input type="url" id="edit-gift1-link" class="mt-1 w-full p-3 border border-gray-300 rounded-md"></div>
+                        <div><label for="edit-gift2-name" class="block text-sm font-medium text-gray-700">Nombre Tienda 2</label><input type="text" id="edit-gift2-name" class="mt-1 w-full p-3 border border-gray-300 rounded-md" placeholder="Palacio de Hierro"></div>
+                        <div><label for="edit-gift2-link" class="block text-sm font-medium text-gray-700">Link Tienda 2</label><input type="url" id="edit-gift2-link" class="mt-1 w-full p-3 border border-gray-300 rounded-md"></div>
+                    </div>
+
+                    <div class="pt-5">
+                        <button type="submit" id="save-details-btn" class="w-full bg-green-600 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-green-700 disabled:bg-gray-400">Guardar Todos los Cambios</button>
+                    </div>
+                 </form>
+            </div>
         </main>
     </div>
 
     <!-- Edit Guest Modal -->
-    <div id="edit-guest-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full p-8">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-serif text-2xl text-black">Detalles de la Invitación</h3>
-                <button id="close-edit-modal-btn" class="text-gray-400 hover:text-gray-800 text-3xl leading-none">&times;</button>
-            </div>
-            
-            <form id="edit-guest-form" class="space-y-4">
-                <input type="hidden" id="edit-guest-id">
-                <div>
-                    <label for="edit-guest-names" class="block text-sm font-medium text-gray-700">Nombres de los invitados</label>
-                    <input type="text" id="edit-guest-names" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" placeholder="Ej: Ana López, Carlos García" required>
-                </div>
-                <div>
-                    <label for="edit-passes-allocated" class="block text-sm font-medium text-gray-700">Número de pases</label>
-                    <input type="number" id="edit-passes-allocated" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" min="1" required>
-                </div>
-                <button type="submit" id="update-guest-btn" class="w-full bg-blue-600 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-blue-700 disabled:bg-gray-400">Guardar Cambios</button>
-            </form>
-
-            <div id="confirmation-details" class="mt-6 border-t pt-4 space-y-2">
-                <!-- Details will be injected here -->
-            </div>
-
-            <div class="mt-6 border-t pt-4 flex flex-col sm:flex-row gap-4">
-                 <button id="modal-generate-link-btn" class="w-full bg-gray-800 text-white py-2 px-4 rounded-full font-semibold text-sm hover:bg-black relative">
-                    Generar Link de Invitación
-                    <div class="tooltip">Copiado!</div>
-                </button>
-                <button id="delete-guest-btn" class="w-full bg-red-600 text-white py-2 px-4 rounded-full font-semibold text-sm hover:bg-red-700">Eliminar Invitación</button>
-            </div>
-        </div>
-    </div>
+    <div id="edit-guest-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 hidden items-center justify-center p-4"><div class="bg-white rounded-lg shadow-xl max-w-lg w-full p-8"><div class="flex justify-between items-center mb-4"><h3 class="font-serif text-2xl text-black">Detalles de la Invitación</h3><button id="close-edit-modal-btn" class="text-gray-400 hover:text-gray-800 text-3xl leading-none">&times;</button></div><form id="edit-guest-form" class="space-y-4"><input type="hidden" id="edit-guest-id"><div><label for="edit-guest-names" class="block text-sm font-medium text-gray-700">Nombres de los invitados</label><input type="text" id="edit-guest-names" class="mt-1 w-full p-3 border border-gray-300 rounded-md" required></div><div><label for="edit-passes-allocated" class="block text-sm font-medium text-gray-700">Número de pases</label><input type="number" id="edit-passes-allocated" class="mt-1 w-full p-3 border border-gray-300 rounded-md" min="1" required></div><button type="submit" id="update-guest-btn" class="w-full bg-blue-600 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-blue-700">Guardar Cambios</button></form><div id="confirmation-details" class="mt-6 border-t pt-4 space-y-2"></div><div class="mt-6 border-t pt-4 flex flex-col sm:flex-row gap-4"><button id="modal-generate-link-btn" class="w-full bg-gray-800 text-white py-2 px-4 rounded-full font-semibold text-sm hover:bg-black relative">Generar Link de Invitación<div class="tooltip">Copiado!</div></button><button id="delete-guest-btn" class="w-full bg-red-600 text-white py-2 px-4 rounded-full font-semibold text-sm hover:bg-red-700">Eliminar Invitación</button></div></div></div>
 
 
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, collection, getDocs, addDoc, serverTimestamp, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, getDocs, addDoc, serverTimestamp, doc, updateDoc, deleteDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         // --- Firebase Configuration ---
         const firebaseConfig = {
@@ -164,18 +180,33 @@
             appId: "1:106564189041:web:55b6054892b28894bb14d0"
         };
         
-        const ACCESS_PASSWORD = "boda"; 
-
         // --- DOM Elements ---
-        const passwordModal = document.getElementById('password-modal');
-        const passwordForm = document.getElementById('password-form');
+        const loginModal = document.getElementById('login-modal');
+        const loginForm = document.getElementById('login-form');
         const dashboardContent = document.getElementById('dashboard-content');
-        const totalGuestsEl = document.getElementById('total-guests');
-        const confirmedGuestsEl = document.getElementById('confirmed-guests');
-        const pendingGuestsEl = document.getElementById('pending-guests');
         const addGuestForm = document.getElementById('add-guest-form');
         const guestListContainer = document.getElementById('guest-list-container');
         const listLoader = document.getElementById('list-loader');
+        const logoutBtn = document.getElementById('logout-btn');
+        
+        // Tabs
+        const tabInvitations = document.getElementById('tab-invitations');
+        const tabDetails = document.getElementById('tab-details');
+        const viewInvitations = document.getElementById('view-invitations');
+        const viewDetails = document.getElementById('view-details');
+        
+        // Event Details Form
+        const eventDetailsForm = document.getElementById('event-details-form');
+        const itineraryEditor = document.getElementById('itinerary-editor');
+        const addItineraryItemBtn = document.getElementById('add-itinerary-item-btn');
+        
+        // Stats Elements
+        const totalInvitationsEl = document.getElementById('total-invitations');
+        const totalPassesEl = document.getElementById('total-passes');
+        const totalConfirmedGuestsEl = document.getElementById('total-confirmed-guests');
+        const confirmedInvitationsEl = document.getElementById('confirmed-invitations');
+        const incompleteConfirmationsEl = document.getElementById('incomplete-confirmations');
+        const pendingInvitationsEl = document.getElementById('pending-invitations');
         
         // Edit Modal Elements
         const editGuestModal = document.getElementById('edit-guest-modal');
@@ -190,32 +221,69 @@
         const deleteGuestBtn = document.getElementById('delete-guest-btn');
 
         let db;
+        let auth;
+        
+        // --- Initialize Firebase ---
+        const app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
 
-        // --- Password Check ---
-        passwordForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (e.target.elements['password-input'].value === ACCESS_PASSWORD) {
-                passwordModal.classList.add('hidden');
+        // --- Auth State Management ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loginModal.classList.add('hidden');
                 dashboardContent.classList.remove('hidden');
-                initializeAppAndData();
+                loadGuests();
+                loadEventDetails();
             } else {
-                e.target.elements['password-error'].classList.remove('hidden');
+                loginModal.classList.remove('hidden');
+                dashboardContent.classList.add('hidden');
             }
         });
 
-        // --- Main App Logic ---
-        async function initializeAppAndData() {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const loginBtn = e.target.querySelector('button');
+            const email = e.target.elements['email-input'].value;
+            const password = e.target.elements['password-input'].value;
+            const loginError = document.getElementById('login-error');
+            
+            loginBtn.disabled = true;
+            loginError.classList.add('hidden');
+
             try {
-                const app = initializeApp(firebaseConfig);
-                const auth = getAuth(app);
-                db = getFirestore(app);
-                await signInAnonymously(auth);
-                await loadGuests();
+                await signInWithEmailAndPassword(auth, email, password);
             } catch (error) {
-                console.error("Firebase Error:", error);
-                alert("No se pudo conectar con la base de datos. Revisa la consola para más detalles.");
+                console.error("Login Error:", error);
+                loginError.classList.remove('hidden');
+            } finally {
+                loginBtn.disabled = false;
             }
+        });
+
+        logoutBtn.addEventListener('click', async () => {
+            await signOut(auth);
+        });
+
+        // --- Tab Navigation ---
+        function switchTab(activeTab) {
+            const isInvitations = activeTab === 'invitations';
+            
+            tabInvitations.classList.toggle('border-black', isInvitations);
+            tabInvitations.classList.toggle('text-gray-900', isInvitations);
+            tabInvitations.classList.toggle('border-transparent', !isInvitations);
+            tabInvitations.classList.toggle('text-gray-500', !isInvitations);
+            
+            tabDetails.classList.toggle('border-black', !isInvitations);
+            tabDetails.classList.toggle('text-gray-900', !isInvitations);
+            tabDetails.classList.toggle('border-transparent', isInvitations);
+            tabDetails.classList.toggle('text-gray-500', isInvitations);
+
+            viewInvitations.classList.toggle('hidden', !isInvitations);
+            viewDetails.classList.toggle('hidden', isInvitations);
         }
+        tabInvitations.addEventListener('click', () => switchTab('invitations'));
+        tabDetails.addEventListener('click', () => switchTab('details'));
 
         // --- Data Loading & Display ---
         async function loadGuests() {
@@ -227,16 +295,43 @@
             
             const guestList = invitationSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             
-            let confirmedCount = 0;
+            let stats = {
+                totalInvitations: guestList.length,
+                totalPassesAllocated: 0,
+                totalConfirmedGuests: 0,
+                confirmedInvitationsCount: 0,
+                incompleteConfirmationsCount: 0
+            };
             
             guestList.sort((a, b) => ((a.guestNames && a.guestNames[0]) || '').localeCompare((b.guestNames && b.guestNames[0]) || ''));
 
             guestList.forEach(guest => {
+                stats.totalPassesAllocated += guest.passesAllocated || 0;
+
                 const isConfirmed = guest.status === 'Confirmado';
-                if (isConfirmed) confirmedCount++;
+                let statusText = 'No Confirmado';
+                let statusColorClass = 'text-yellow-600';
+                let borderColorClass = 'border-yellow-500';
+
+                if (isConfirmed) {
+                    stats.confirmedInvitationsCount++;
+                    const confirmedGuestsCount = Array.isArray(guest.confirmedGuests) ? guest.confirmedGuests.length : 0;
+                    stats.totalConfirmedGuests += confirmedGuestsCount;
+
+                    if (confirmedGuestsCount < guest.passesAllocated) {
+                        stats.incompleteConfirmationsCount++;
+                        statusText = 'Confirmación Incompleta';
+                        statusColorClass = 'text-orange-600';
+                        borderColorClass = 'border-orange-500';
+                    } else {
+                        statusText = 'Confirmado';
+                        statusColorClass = 'text-green-600';
+                        borderColorClass = 'border-green-500';
+                    }
+                }
                 
                 const card = document.createElement('div');
-                card.className = `guest-card bg-white p-4 rounded-lg shadow-md flex items-center justify-between gap-4 cursor-pointer hover:shadow-lg transition-shadow ${isConfirmed ? 'border-l-4 border-green-500' : 'border-l-4 border-yellow-500'}`;
+                card.className = `guest-card bg-white p-4 rounded-lg shadow-md flex items-center justify-between gap-4 cursor-pointer hover:shadow-lg transition-shadow ${borderColorClass}`;
                 card.dataset.guest = JSON.stringify(guest);
                 
                 const guestNamesDisplay = Array.isArray(guest.guestNames) ? guest.guestNames.join(', ') : 'Invitado sin nombre';
@@ -247,20 +342,23 @@
                         <p class="text-sm text-gray-600">${guest.passesAllocated || 0} ${guest.passesAllocated === 1 ? 'pase' : 'pases'} asignados</p>
                     </div>
                     <div class="flex-shrink-0">
-                        <p class="text-sm font-semibold ${isConfirmed ? 'text-green-600' : 'text-yellow-600'}">${guest.status || 'No Confirmado'}</p>
+                        <p class="text-sm font-semibold ${statusColorClass}">${statusText}</p>
                     </div>
                 `;
                 guestListContainer.appendChild(card);
             });
 
             listLoader.classList.add('hidden');
-            updateStats(guestList.length, confirmedCount);
+            updateStats(stats);
         }
 
-        function updateStats(total, confirmed) {
-            totalGuestsEl.textContent = total;
-            confirmedGuestsEl.textContent = confirmed;
-            pendingGuestsEl.textContent = total - confirmed;
+        function updateStats(stats) {
+            totalInvitationsEl.textContent = stats.totalInvitations;
+            totalPassesEl.textContent = stats.totalPassesAllocated;
+            totalConfirmedGuestsEl.textContent = stats.totalConfirmedGuests;
+            confirmedInvitationsEl.textContent = stats.confirmedInvitationsCount;
+            incompleteConfirmationsEl.textContent = stats.incompleteConfirmationsCount;
+            pendingInvitationsEl.textContent = stats.totalInvitations - stats.confirmedInvitationsCount;
         }
 
         // --- Add Guest Logic ---
@@ -305,7 +403,21 @@
             editGuestNamesInput.value = Array.isArray(guest.guestNames) ? guest.guestNames.join(', ') : '';
             editPassesAllocatedInput.value = guest.passesAllocated || 1;
             
-            let detailsHtml = `<p><strong>Estado:</strong> <span class="${guest.status === 'Confirmado' ? 'text-green-600' : 'text-yellow-600'}">${guest.status || 'No Confirmado'}</span></p>`;
+            let statusText = guest.status || 'No Confirmado';
+            let statusColorClass = 'text-yellow-600';
+
+            if (guest.status === 'Confirmado') {
+                const confirmedGuestsCount = Array.isArray(guest.confirmedGuests) ? guest.confirmedGuests.length : 0;
+                if (confirmedGuestsCount < guest.passesAllocated) {
+                    statusText = `Confirmación Incompleta (${confirmedGuestsCount} de ${guest.passesAllocated})`;
+                    statusColorClass = 'text-orange-600';
+                } else {
+                    statusText = 'Confirmado';
+                    statusColorClass = 'text-green-600';
+                }
+            }
+
+            let detailsHtml = `<p><strong>Estado:</strong> <span class="${statusColorClass}">${statusText}</span></p>`;
             if (guest.status === 'Confirmado' && Array.isArray(guest.confirmedGuests)) {
                 detailsHtml += `<p><strong>Invitados Confirmados:</strong> ${guest.confirmedGuests.join(', ')}</p>`;
                 if (guest.confirmedAt && guest.confirmedAt.toDate) {
@@ -395,6 +507,103 @@
                 console.error('Error al copiar: ', err);
                 alert('No se pudo copiar el enlace.');
             });
+        });
+
+        // --- Event Details Logic ---
+        async function loadEventDetails() {
+            const docRef = doc(db, "eventDetails", "main");
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                document.getElementById('edit-couple-names').value = data.coupleNames || '';
+                document.getElementById('edit-welcome-phrase').value = data.welcomePhrase || '';
+                document.getElementById('edit-bride-parents').value = data.brideParents || '';
+                document.getElementById('edit-groom-parents').value = data.groomParents || '';
+                document.getElementById('edit-wedding-date').value = data.weddingDate || '';
+                document.getElementById('edit-photo-url').value = data.photoUrl || '';
+                document.getElementById('edit-ceremony-name').value = data.ceremonyName || '';
+                document.getElementById('edit-ceremony-time').value = data.ceremonyTime || '';
+                document.getElementById('edit-ceremony-maps').value = data.ceremonyMapsLink || '';
+                document.getElementById('edit-reception-name').value = data.receptionName || '';
+                document.getElementById('edit-reception-time').value = data.receptionTime || '';
+                document.getElementById('edit-reception-maps').value = data.receptionMapsLink || '';
+                document.getElementById('edit-gift1-name').value = data.gift1Name || '';
+                document.getElementById('edit-gift1-link').value = data.gift1Link || '';
+                document.getElementById('edit-gift2-name').value = data.gift2Name || '';
+                document.getElementById('edit-gift2-link').value = data.gift2Link || '';
+                
+                itineraryEditor.innerHTML = '';
+                if (data.itinerary && Array.isArray(data.itinerary)) {
+                    data.itinerary.forEach(createItineraryItem);
+                }
+            }
+        }
+
+        function createItineraryItem(item = { time: '', activity: '' }) {
+            const div = document.createElement('div');
+            div.className = 'flex items-center gap-4';
+            div.innerHTML = `
+                <input type="text" class="itinerary-time w-1/4 p-2 border border-gray-300 rounded-md" value="${item.time}" placeholder="Hora (ej: 5:00 PM)">
+                <input type="text" class="itinerary-activity flex-grow p-2 border border-gray-300 rounded-md" value="${item.activity}" placeholder="Actividad">
+                <button type="button" class="remove-itinerary-item-btn text-red-500 hover:text-red-700 font-bold text-xl">&times;</button>
+            `;
+            itineraryEditor.appendChild(div);
+        }
+
+        addItineraryItemBtn.addEventListener('click', () => createItineraryItem());
+        itineraryEditor.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-itinerary-item-btn')) {
+                e.target.parentElement.remove();
+            }
+        });
+
+        eventDetailsForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const saveBtn = document.getElementById('save-details-btn');
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'Guardando...';
+
+            const itinerary = [];
+            document.querySelectorAll('#itinerary-editor > div').forEach(item => {
+                const time = item.querySelector('.itinerary-time').value;
+                const activity = item.querySelector('.itinerary-activity').value;
+                if (time && activity) {
+                    itinerary.push({ time, activity });
+                }
+            });
+
+            const dataToSave = {
+                coupleNames: document.getElementById('edit-couple-names').value,
+                welcomePhrase: document.getElementById('edit-welcome-phrase').value,
+                brideParents: document.getElementById('edit-bride-parents').value,
+                groomParents: document.getElementById('edit-groom-parents').value,
+                weddingDate: document.getElementById('edit-wedding-date').value,
+                photoUrl: document.getElementById('edit-photo-url').value,
+                ceremonyName: document.getElementById('edit-ceremony-name').value,
+                ceremonyTime: document.getElementById('edit-ceremony-time').value,
+                ceremonyMapsLink: document.getElementById('edit-ceremony-maps').value,
+                receptionName: document.getElementById('edit-reception-name').value,
+                receptionTime: document.getElementById('edit-reception-time').value,
+                receptionMapsLink: document.getElementById('edit-reception-maps').value,
+                gift1Name: document.getElementById('edit-gift1-name').value,
+                gift1Link: document.getElementById('edit-gift1-link').value,
+                gift2Name: document.getElementById('edit-gift2-name').value,
+                gift2Link: document.getElementById('edit-gift2-link').value,
+                itinerary: itinerary
+            };
+
+            try {
+                const docRef = doc(db, "eventDetails", "main");
+                await setDoc(docRef, dataToSave, { merge: true });
+                alert("¡Los detalles del evento se han guardado con éxito!");
+            } catch (error) {
+                console.error("Error al guardar los detalles del evento: ", error);
+                alert("Hubo un error al guardar los cambios.");
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.textContent = 'Guardar Todos los Cambios';
+            }
         });
 
     </script>

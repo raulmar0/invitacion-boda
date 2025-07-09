@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maritza & Jaime | Nuestra Boda</title>
+    <title>Nuestra Boda</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,14 +29,14 @@
 
         <!-- Section 1: Landing Page -->
         <section class="min-h-[90vh] flex flex-col justify-center items-center text-center p-6">
-            <div class="font-serif text-6xl md:text-8xl text-black tracking-wider">M & J</div>
-            <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-md">Dos almas, un solo camino. Nuestro para siempre comienza aquí.</p>
+            <div id="couple-monogram" class="font-serif text-6xl md:text-8xl text-black tracking-wider">M & J</div>
+            <p id="welcome-phrase" class="mt-6 text-lg md:text-xl text-gray-700 max-w-md"></p>
         </section>
 
         <!-- Section 2: Main Photo -->
         <section class="px-6">
-            <img src="https://placehold.co/1200x800/333/FFFFFF?text=Maritza+%26+Jaime" 
-                 alt="Fotografía de Maritza y Jaime en blanco y negro" 
+            <img id="main-photo" src="https://placehold.co/1200x800/333/FFFFFF?text=Cargando+foto..." 
+                 alt="Fotografía de la pareja" 
                  class="w-full h-auto object-cover rounded-lg shadow-md"
                  onerror="this.onerror=null;this.src='https://placehold.co/1200x800/cccccc/ffffff?text=Error+al+cargar+imagen';">
         </section>
@@ -46,28 +46,24 @@
             <h2 class="text-xl md:text-2xl text-gray-800 mb-8">Con la bendición de nuestros padres</h2>
             <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
                 <div class="text-lg">
-                    <p class="font-semibold text-black">Maritza De la Cruz & Raul Hernández</p>
+                    <p id="bride-parents" class="font-semibold text-black"></p>
                     <p class="text-sm text-gray-500 tracking-widest mt-1">PADRES DE LA NOVIA</p>
                 </div>
                 <div class="w-px h-12 bg-gray-300 hidden md:block"></div>
                 <div class="text-lg">
-                    <p class="font-semibold text-black">Silvia Rodríguez & Javier Favela</p>
+                    <p id="groom-parents" class="font-semibold text-black"></p>
                     <p class="text-sm text-gray-500 tracking-widest mt-1">PADRES DEL NOVIO</p>
                 </div>
             </div>
         </section>
 
         <!-- Section 4: Couple's Names -->
-        <section class="text-center py-12 bg-gray-50">
-             <h1 class="font-serif text-5xl md:text-7xl text-black">Maritza Hernández</h1>
-             <p class="font-serif text-4xl md:text-5xl text-gray-600 my-4">&</p>
-             <h1 class="font-serif text-5xl md:text-7xl text-black">Jaime Favela</h1>
-        </section>
+        <section id="couple-names-section" class="text-center py-12 bg-gray-50"></section>
 
         <!-- Section 5: Event Date -->
         <section class="text-center py-16 px-6">
             <h2 class="text-2xl md:text-3xl text-gray-700">Nos casamos el</h2>
-            <p class="font-serif text-4xl md:text-5xl text-black mt-4">SÁBADO, 17 DE OCTUBRE DE 2026</p>
+            <p id="wedding-date" class="font-serif text-4xl md:text-5xl text-black mt-4"></p>
             <p class="mt-4 text-lg text-gray-600">Estamos listos para decir "Sí, acepto".</p>
         </section>
 
@@ -77,18 +73,16 @@
                 <div class="text-center">
                     <div class="mb-4 inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-12l-8 8-8-8" /><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg></div>
                     <h3 class="font-serif text-3xl text-black">Ceremonia</h3>
-                    <p class="mt-4 text-lg font-semibold">Parroquia de la Purísima Concepción</p>
-                    <p class="text-gray-700">Sábado, 17 de octubre de 2026</p>
-                    <p class="text-gray-700">5:00 PM</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Iglesia+de+la+Purisima,+Av.+Miguel+Hidalgo+y+Costilla+343,+Centro,+64000+Monterrey,+N.L." target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-black text-white py-3 px-8 rounded-full text-sm font-semibold uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300">Ver en Google Maps</a>
+                    <p id="ceremony-name" class="mt-4 text-lg font-semibold"></p>
+                    <p id="ceremony-time" class="text-gray-700"></p>
+                    <a id="ceremony-maps-link" href="#" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-black text-white py-3 px-8 rounded-full text-sm font-semibold uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300">Ver en Google Maps</a>
                 </div>
                 <div class="text-center">
                     <div class="mb-4 inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M21.151 13.368A9.002 9.002 0 0012 3c-2.386 0-4.591.91-6.151 2.418M3.849 10.632A9.002 9.002 0 0012 21c2.386 0 4.591-.91 6.151-2.418" /></svg></div>
                     <h3 class="font-serif text-3xl text-black">Recepción</h3>
-                    <p class="mt-4 text-lg font-semibold">Museo del Noreste (MUNE)</p>
-                    <p class="text-gray-700">Sábado, 17 de octubre de 2026</p>
-                    <p class="text-gray-700">7:00 PM</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Museo+del+Noreste,+Dr+José+Ma.+Coss+445,+Centro,+64000+Monterrey,+N.L." target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-black text-white py-3 px-8 rounded-full text-sm font-semibold uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300">Ver en Google Maps</a>
+                    <p id="reception-name" class="mt-4 text-lg font-semibold"></p>
+                    <p id="reception-time" class="text-gray-700"></p>
+                    <a id="reception-maps-link" href="#" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-black text-white py-3 px-8 rounded-full text-sm font-semibold uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300">Ver en Google Maps</a>
                 </div>
             </div>
         </section>
@@ -96,16 +90,7 @@
         <!-- Section 8: Itinerary -->
         <section class="py-16 px-6">
             <h2 class="font-serif text-4xl text-center text-black mb-12">Nuestro Día</h2>
-            <div class="max-w-md mx-auto relative">
-                <div class="absolute left-4 top-2 bottom-2 w-0.5 bg-gray-200"></div>
-                <div class="space-y-10">
-                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">5:00 PM</p><p class="text-lg text-black">Ceremonia Religiosa</p></div></div>
-                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">7:00 PM</p><p class="text-lg text-black">Cóctel de Bienvenida</p></div></div>
-                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">8:00 PM</p><p class="text-lg text-black">Cena</p></div></div>
-                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">9:30 PM</p><p class="text-lg text-black">¡Que empiece la fiesta!</p></div></div>
-                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">2:00 AM</p><p class="text-lg text-black">Última canción</p></div></div>
-                </div>
-            </div>
+            <div id="itinerary-container" class="max-w-md mx-auto relative"></div>
         </section>
 
         <!-- Section 9: Number of Passes (Dynamic) -->
@@ -118,17 +103,16 @@
         </section>
         
         <!-- Section 10: Gift Registry -->
-        <section class="py-16 px-6 text-center">
-            <div class="mb-4 inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg></div>
-            <h3 class="font-serif text-3xl text-black">Mesa de Regalos</h3>
-            <p class="max-w-xl mx-auto mt-4 text-gray-700">Su presencia es nuestro mejor regalo. Si además desean tener un detalle con nosotros, pueden hacerlo a través de nuestra mesa de regalos o en el buzón que tendremos en la recepción. ¡Muchas gracias!</p>
-            <div class="mt-8 flex flex-col items-center gap-4 w-full max-w-xs mx-auto">
-                <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/55512345" target="_blank" rel="noopener noreferrer" class="w-full text-center bg-gray-800 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-black transition-colors duration-300">Liverpool</a>
-                <a href="https://www.elpalaciodehierro.com/celebra/resultado-de-busqueda/evento/1234567" target="_blank" rel="noopener noreferrer" class="w-full text-center bg-gray-800 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-black transition-colors duration-300">Palacio de Hierro</a>
+        <section class="py-16 px-6">
+            <div id="gift-registry-card" class="bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto text-center border border-gray-100 hidden">
+                <div class="mb-4 inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg></div>
+                <h3 class="font-serif text-3xl text-black">Mesa de Regalos</h3>
+                <p class="max-w-xl mx-auto mt-4 text-gray-700">Su presencia es nuestro mejor regalo. Si además desean tener un detalle con nosotros, pueden hacerlo a través de nuestra mesa de regalos o en el buzón que tendremos en la recepción. ¡Muchas gracias!</p>
+                <div id="gift-registry-buttons" class="mt-8 flex flex-col items-center gap-4 w-full max-w-xs mx-auto"></div>
             </div>
         </section>
 
-        <footer class="text-center py-8 text-gray-500 text-sm"><p>Maritza & Jaime © 2026</p></footer>
+        <footer class="text-center py-8 text-gray-500 text-sm"><p id="footer-names"></p></footer>
     </div>
 
     <!-- Loading / Status Messages -->
@@ -138,38 +122,15 @@
     </div>
 
     <!-- Modal for Confirmation -->
-    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
-        <div class="modal-content bg-white rounded-lg shadow-xl max-w-md w-full">
-            <div id="form-content" class="p-8 relative">
-                <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-3xl leading-none">×</button>
-                <h3 class="font-serif text-2xl text-black mb-4">Confirmar Asistencia</h3>
-                <p class="text-gray-600 mb-6">Por favor, introduce los nombres completos de los asistentes.</p>
-                <form id="confirmationForm">
-                    <div id="guest-inputs-container" class="space-y-4 mb-6"></div>
-                    <button type="submit" class="w-full bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800">Enviar Confirmación</button>
-                </form>
-            </div>
-            <div id="success-message" class="hidden p-8 text-center">
-                 <h3 class="font-serif text-2xl text-black mb-4">¡Gracias!</h3>
-                 <p class="text-gray-600 mb-6">Hemos recibido tu confirmación. ¡Nos vemos en la boda!</p>
-                 <button id="closeSuccessBtn" class="w-full bg-gray-700 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-600">Cerrar</button>
-            </div>
-        </div>
-    </div>
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"><div class="modal-content bg-white rounded-lg shadow-xl max-w-md w-full"><div id="form-content" class="p-8 relative"><button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-3xl leading-none">×</button><h3 class="font-serif text-2xl text-black mb-4">Confirmar Asistencia</h3><p class="text-gray-600 mb-6">Por favor, introduce los nombres de los asistentes.</p><form id="confirmationForm"><div id="guest-inputs-container" class="space-y-4 mb-4"></div><p id="confirmation-error" class="text-red-500 text-sm mb-4 hidden"></p><button type="submit" class="w-full bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800">Enviar Confirmación</button></form></div><div id="success-message" class="hidden p-8 text-center"><h3 class="font-serif text-2xl text-black mb-4">¡Gracias!</h3><p class="text-gray-600 mb-6">Hemos recibido tu confirmación. ¡Nos vemos en la boda!</p><button id="closeSuccessBtn" class="w-full bg-gray-700 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-600">Cerrar</button></div></div></div>
     
     <!-- Using modular Firebase SDK -->
     <script type="module">
-        // Import functions from the Firebase SDK
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getFirestore, doc, getDoc, updateDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // ******************************************************************
-        // ** ACCIÓN REQUERIDA: Pega tu configuración de Firebase aquí **
-        // ******************************************************************
-        // Ve a la Consola de Firebase -> Configuración del proyecto -> General
-        // En la sección "Tus apps", haz clic en el ícono de web </>
-        // Copia el objeto de configuración y pégalo aquí.
+        // --- Your Firebase Configuration ---
         const firebaseConfig = {
             apiKey: "AIzaSyAOwGMwUKJ8Poup51q8_mXty4-oLe9eGO0",
             authDomain: "boda-martiza-jaime.firebaseapp.com",
@@ -178,7 +139,6 @@
             messagingSenderId: "106564189041",
             appId: "1:106564189041:web:55b6054892b28894bb14d0"
         };
-        // ******************************************************************
 
         // --- DOM Elements ---
         const mainContent = document.getElementById('main-content');
@@ -196,6 +156,7 @@
         const guestInputsContainer = document.getElementById('guest-inputs-container');
         const formContent = document.getElementById('form-content');
         const successMessage = document.getElementById('success-message');
+        const confirmationErrorEl = document.getElementById('confirmation-error');
 
         let db;
         let currentInvitationId = null;
@@ -204,18 +165,16 @@
         // --- Main Function ---
         async function initializeAppAndData() {
             try {
-                // **NEW**: Validate the firebaseConfig before using it
-                if (!firebaseConfig || firebaseConfig.apiKey.includes("...")) {
-                    showStatus("ACCIÓN REQUERIDA: Debes pegar tu configuración de Firebase en el código HTML. Revisa la sección de comentarios en el script.", true);
-                    return;
-                }
-
-                // Initialize Firebase
                 const app = initializeApp(firebaseConfig);
                 const auth = getAuth(app);
                 db = getFirestore(app);
 
                 await signInAnonymously(auth);
+
+                const eventDetailsRef = doc(db, "eventDetails", "main");
+                const eventDetailsSnap = await getDoc(eventDetailsRef);
+                const eventDetails = eventDetailsSnap.exists() ? eventDetailsSnap.data() : null;
+                populateEventDetails(eventDetails);
 
                 const params = new URLSearchParams(window.location.search);
                 currentInvitationId = params.get('invitacion');
@@ -225,14 +184,13 @@
                     return;
                 }
                 
-                const docRef = doc(db, 'invitations', currentInvitationId);
-                const docSnap = await getDoc(docRef);
+                const invitationRef = doc(db, 'invitations', currentInvitationId);
+                const invitationSnap = await getDoc(invitationRef);
 
-                if (docSnap.exists()) {
-                    const invitationData = docSnap.data();
+                if (invitationSnap.exists()) {
+                    const invitationData = invitationSnap.data();
                     passesAllocated = invitationData.passesAllocated || 0;
-                    
-                    displayInvitation(invitationData);
+                    displayInvitationStatus(invitationData);
                     statusContainer.classList.add('hidden');
                     mainContent.classList.remove('hidden');
                 } else {
@@ -241,17 +199,82 @@
 
             } catch (error) {
                 console.error("Firebase Initialization Error:", error);
-                if (error.code === "auth/api-key-not-valid") {
-                     showStatus("Error de configuración: La clave de API de Firebase no es válida. Por favor, verifica tu configuración.", true);
-                } else {
-                     showStatus("Ocurrió un error al cargar la invitación. Por favor, intenta de nuevo.", true);
-                }
+                showStatus("Ocurrió un error al cargar la invitación. Por favor, intenta de nuevo.", true);
+            }
+        }
+
+        function populateEventDetails(details) {
+            const defaultDetails = {
+                coupleNames: "Maritza & Jaime",
+                welcomePhrase: "Dos almas, un solo camino. Nuestro para siempre comienza aquí.",
+                brideParents: "Maritza De la Cruz & Raul Hernández",
+                groomParents: "Silvia Rodríguez & Javier Favela",
+                weddingDate: "SÁBADO, 17 DE OCTUBRE DE 2026",
+                photoUrl: "https://placehold.co/1200x800/333/FFFFFF?text=Maritza+%26+Jaime",
+                ceremonyName: "Parroquia de la Purísima Concepción",
+                ceremonyTime: "5:00 PM",
+                ceremonyMapsLink: "https://www.google.com/maps/search/?api=1&query=Iglesia+de+la+Purisima,+Av.+Miguel+Hidalgo+y+Costilla+343,+Centro,+64000+Monterrey,+N.L.",
+                receptionName: "Museo del Noreste (MUNE)",
+                receptionTime: "7:00 PM",
+                receptionMapsLink: "https://www.google.com/maps/search/?api=1&query=Museo+del+Noreste,+Dr+José+Ma.+Coss+445,+Centro,+64000+Monterrey,+N.L.",
+                itinerary: [
+                    { time: "5:00 PM", activity: "Ceremonia Religiosa" },
+                    { time: "7:00 PM", activity: "Cóctel de Bienvenida" },
+                    { time: "8:00 PM", activity: "Cena" },
+                    { time: "9:30 PM", activity: "¡Que empiece la fiesta!" },
+                    { time: "2:00 AM", activity: "Última canción" }
+                ],
+                gift1Name: "Liverpool",
+                gift1Link: "https://mesaderegalos.liverpool.com.mx/",
+                gift2Name: "Palacio de Hierro",
+                gift2Link: "https://www.elpalaciodehierro.com/celebra"
+            };
+
+            const data = { ...defaultDetails, ...details };
+
+            const [brideName, groomName] = data.coupleNames.split('&').map(n => n.trim());
+            document.getElementById('couple-monogram').textContent = `${brideName ? brideName.charAt(0) : 'M'} & ${groomName ? groomName.charAt(0) : 'J'}`;
+            document.getElementById('couple-names-section').innerHTML = `<h1 class="font-serif text-5xl md:text-7xl text-black">${brideName || 'La Novia'}</h1><p class="font-serif text-4xl md:text-5xl text-gray-600 my-4">&</p><h1 class="font-serif text-5xl md:text-7xl text-black">${groomName || 'El Novio'}</h1>`;
+            document.title = `${brideName || 'Nuestra'} & ${groomName || 'Boda'}`;
+            document.getElementById('footer-names').textContent = `${data.coupleNames} © ${new Date().getFullYear() + 2}`;
+            
+            document.getElementById('welcome-phrase').textContent = data.welcomePhrase;
+            document.getElementById('main-photo').src = data.photoUrl;
+            document.getElementById('bride-parents').textContent = data.brideParents;
+            document.getElementById('groom-parents').textContent = data.groomParents;
+            document.getElementById('wedding-date').textContent = data.weddingDate;
+            
+            document.getElementById('ceremony-name').textContent = data.ceremonyName;
+            document.getElementById('ceremony-time').textContent = data.ceremonyTime;
+            document.getElementById('ceremony-maps-link').href = data.ceremonyMapsLink;
+            
+            document.getElementById('reception-name').textContent = data.receptionName;
+            document.getElementById('reception-time').textContent = data.receptionTime;
+            document.getElementById('reception-maps-link').href = data.receptionMapsLink;
+
+            const itineraryContainer = document.getElementById('itinerary-container');
+            itineraryContainer.innerHTML = '<div class="absolute left-4 top-2 bottom-2 w-0.5 bg-gray-200"></div><div class="space-y-10"></div>';
+            const itineraryList = itineraryContainer.querySelector('.space-y-10');
+            data.itinerary.forEach(item => {
+                itineraryList.innerHTML += `<div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">${item.time}</p><p class="text-lg text-black">${item.activity}</p></div></div>`;
+            });
+
+            const giftButtons = document.getElementById('gift-registry-buttons');
+            giftButtons.innerHTML = '';
+            if (data.gift1Name && data.gift1Link) {
+                giftButtons.innerHTML += `<a href="${data.gift1Link}" target="_blank" rel="noopener noreferrer" class="w-full text-center bg-gray-800 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-black transition-colors duration-300">${data.gift1Name}</a>`;
+            }
+            if (data.gift2Name && data.gift2Link) {
+                giftButtons.innerHTML += `<a href="${data.gift2Link}" target="_blank" rel="noopener noreferrer" class="w-full text-center bg-gray-800 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-black transition-colors duration-300">${data.gift2Name}</a>`;
+            }
+            if(giftButtons.innerHTML !== '') {
+                document.getElementById('gift-registry-card').classList.remove('hidden');
             }
         }
 
         // --- UI Updates ---
-        function displayInvitation(data) {
-            passesContainer.textContent = `${data.passesAllocated} ${data.passesAllocated === 1 ? 'pase' : 'pases'}`;
+        function displayInvitationStatus(data) {
+            passesContainer.textContent = `${passesAllocated} ${passesAllocated === 1 ? 'pase' : 'pases'}`;
 
             if (data.status === 'Confirmado') {
                 confirmationActionContainer.innerHTML = `
@@ -294,6 +317,7 @@
                 modal.classList.remove('flex');
                 successMessage.classList.add('hidden');
                 formContent.classList.remove('hidden');
+                confirmationErrorEl.classList.add('hidden');
             }, 300);
         }
         
@@ -303,7 +327,7 @@
                 guestInputsContainer.innerHTML += `
                     <div>
                         <label for="guest-${i}" class="block text-sm font-medium text-gray-700 mb-1 text-left">Nombre del Asistente ${i}</label>
-                        <input type="text" id="guest-${i}" name="guestName" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" placeholder="Nombre completo" required>
+                        <input type="text" id="guest-${i}" name="guestName" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" placeholder="Nombre completo">
                     </div>`;
             }
         }
@@ -314,21 +338,19 @@
             const submitButton = event.target.querySelector('button[type="submit"]');
             submitButton.disabled = true;
             submitButton.textContent = 'Enviando...';
+            confirmationErrorEl.classList.add('hidden');
 
             const nameInputs = guestInputsContainer.querySelectorAll('input[name="guestName"]');
-            const confirmedGuests = Array.from(nameInputs).map(input => input.value.trim()).filter(name => name);
-            
-            let allValid = true;
-            nameInputs.forEach(input => {
-                if(!input.value.trim()){
-                    input.classList.add('border-red-500');
-                    allValid = false;
-                } else {
-                    input.classList.remove('border-red-500');
-                }
-            });
+            nameInputs.forEach(input => input.classList.remove('border-red-500'));
 
-            if (!allValid || confirmedGuests.length === 0) {
+            const confirmedGuests = Array.from(nameInputs)
+                .map(input => input.value.trim())
+                .filter(name => name);
+            
+            if (confirmedGuests.length === 0) {
+                confirmationErrorEl.textContent = 'Por favor, introduce el nombre de al menos un asistente.';
+                confirmationErrorEl.classList.remove('hidden');
+                nameInputs.forEach(input => input.classList.add('border-red-500'));
                 submitButton.disabled = false;
                 submitButton.textContent = 'Enviar Confirmación';
                 return;
@@ -345,7 +367,8 @@
                 successMessage.classList.remove('hidden');
             } catch (error) {
                 console.error("Error updating document: ", error);
-                alert("Hubo un error al enviar tu confirmación. Por favor, intenta de nuevo.");
+                confirmationErrorEl.textContent = 'Hubo un error al enviar tu confirmación. Intenta de nuevo.';
+                confirmationErrorEl.classList.remove('hidden');
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = 'Enviar Confirmación';
