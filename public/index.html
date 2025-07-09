@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maritza & Jaime | Nuestra Boda</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #374151; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .modal-content { transition: all 0.3s ease-out; transform: translateY(-20px) scale(0.95); opacity: 0; }
+        .modal-visible .modal-content { transform: translateY(0) scale(1); opacity: 1; }
+        .loader { border: 4px solid #f3f3f3; border-radius: 50%; border-top: 4px solid #333; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Main container, hidden until data is loaded -->
+    <div id="main-content" class="max-w-3xl mx-auto hidden">
+
+        <!-- Section 1: Landing Page -->
+        <section class="min-h-[90vh] flex flex-col justify-center items-center text-center p-6">
+            <div class="font-serif text-6xl md:text-8xl text-black tracking-wider">M & J</div>
+            <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-md">Dos almas, un solo camino. Nuestro para siempre comienza aquí.</p>
+        </section>
+
+        <!-- Section 2: Main Photo -->
+        <section class="px-6">
+            <img src="https://placehold.co/1200x800/333/FFFFFF?text=Maritza+%26+Jaime" 
+                 alt="Fotografía de Maritza y Jaime en blanco y negro" 
+                 class="w-full h-auto object-cover rounded-lg shadow-md"
+                 onerror="this.onerror=null;this.src='https://placehold.co/1200x800/cccccc/ffffff?text=Error+al+cargar+imagen';">
+        </section>
+
+        <!-- Section 3: Parents' Names -->
+        <section class="text-center py-16 px-6">
+            <h2 class="text-xl md:text-2xl text-gray-800 mb-8">Con la bendición de nuestros padres</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+                <div class="text-lg">
+                    <p class="font-semibold text-black">Maritza De la Cruz & Raul Hernández</p>
+                    <p class="text-sm text-gray-500 tracking-widest mt-1">PADRES DE LA NOVIA</p>
+                </div>
+                <div class="w-px h-12 bg-gray-300 hidden md:block"></div>
+                <div class="text-lg">
+                    <p class="font-semibold text-black">Silvia Rodríguez & Javier Favela</p>
+                    <p class="text-sm text-gray-500 tracking-widest mt-1">PADRES DEL NOVIO</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Couple's Names -->
+        <section class="text-center py-12 bg-gray-50">
+             <h1 class="font-serif text-5xl md:text-7xl text-black">Maritza Hernández</h1>
+             <p class="font-serif text-4xl md:text-5xl text-gray-600 my-4">&</p>
+             <h1 class="font-serif text-5xl md:text-7xl text-black">Jaime Favela</h1>
+        </section>
+
+        <!-- Section 5: Event Date -->
+        <section class="text-center py-16 px-6">
+            <h2 class="text-2xl md:text-3xl text-gray-700">Nos casamos el</h2>
+            <p class="font-serif text-4xl md:text-5xl text-black mt-4">SÁBADO, 17 DE OCTUBRE DE 2026</p>
+            <p class="mt-4 text-lg text-gray-600">Estamos listos para decir "Sí, acepto".</p>
+        </section>
+
+        <!-- Section 6 & 7: Ceremony & Reception -->
+        <section class="py-16 px-6 bg-gray-50">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8">
+                <div class="text-center">
+                    <div class="mb-4 inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-12l-8 8-8-8" /><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg></div>
+                    <h3 class="font-serif text-3xl text-black">Ceremonia</h3>
+                    <p class="mt-4 text-lg font-semibold">Parroquia de la Purísima Concepción</p>
+                    <p class="text-gray-700">Sábado, 17 de octubre de 2026</p>
+                    <p class="text-gray-700">5:00 PM</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Iglesia+de+la+Purisima,+Av.+Miguel+Hidalgo+y+Costilla+343,+Centro,+64000+Monterrey,+N.L." target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-black text-white py-3 px-8 rounded-full text-sm font-semibold uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300">Ver en Google Maps</a>
+                </div>
+                <div class="text-center">
+                    <div class="mb-4 inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M21.151 13.368A9.002 9.002 0 0012 3c-2.386 0-4.591.91-6.151 2.418M3.849 10.632A9.002 9.002 0 0012 21c2.386 0 4.591-.91 6.151-2.418" /></svg></div>
+                    <h3 class="font-serif text-3xl text-black">Recepción</h3>
+                    <p class="mt-4 text-lg font-semibold">Museo del Noreste (MUNE)</p>
+                    <p class="text-gray-700">Sábado, 17 de octubre de 2026</p>
+                    <p class="text-gray-700">7:00 PM</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Museo+del+Noreste,+Dr+José+Ma.+Coss+445,+Centro,+64000+Monterrey,+N.L." target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-black text-white py-3 px-8 rounded-full text-sm font-semibold uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300">Ver en Google Maps</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 8: Itinerary -->
+        <section class="py-16 px-6">
+            <h2 class="font-serif text-4xl text-center text-black mb-12">Nuestro Día</h2>
+            <div class="max-w-md mx-auto relative">
+                <div class="absolute left-4 top-2 bottom-2 w-0.5 bg-gray-200"></div>
+                <div class="space-y-10">
+                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">5:00 PM</p><p class="text-lg text-black">Ceremonia Religiosa</p></div></div>
+                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">7:00 PM</p><p class="text-lg text-black">Cóctel de Bienvenida</p></div></div>
+                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">8:00 PM</p><p class="text-lg text-black">Cena</p></div></div>
+                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">9:30 PM</p><p class="text-lg text-black">¡Que empiece la fiesta!</p></div></div>
+                    <div class="flex items-center"><div class="z-10 bg-white p-1 rounded-full border-2 border-gray-400"><div class="h-4 w-4 bg-black rounded-full"></div></div><div class="pl-6"><p class="font-semibold text-gray-600">2:00 AM</p><p class="text-lg text-black">Última canción</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Number of Passes (Dynamic) -->
+        <section id="confirmation-section" class="py-16 px-6 text-center bg-gray-50">
+            <p class="text-sm uppercase tracking-widest text-gray-500">Código de Vestimenta</p>
+            <p class="text-2xl font-semibold text-black mt-1">Formal</p>
+            <p class="mt-8 text-lg text-gray-700">Hemos reservado con mucho cariño para ti:</p>
+            <div id="passes-container" class="mt-4 text-3xl font-bold text-black border-2 border-dashed border-gray-400 inline-block px-6 py-3 rounded-lg"></div>
+            <div id="confirmation-action-container" class="mt-8"></div>
+        </section>
+        
+        <!-- Section 10: Gift Registry -->
+        <section class="py-16 px-6 text-center">
+            <div class="mb-4 inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg></div>
+            <h3 class="font-serif text-3xl text-black">Mesa de Regalos</h3>
+            <p class="max-w-xl mx-auto mt-4 text-gray-700">Su presencia es nuestro mejor regalo. Si además desean tener un detalle con nosotros, pueden hacerlo a través de nuestra mesa de regalos o en el buzón que tendremos en la recepción. ¡Muchas gracias!</p>
+            <div class="mt-8 flex flex-col items-center gap-4 w-full max-w-xs mx-auto">
+                <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/55512345" target="_blank" rel="noopener noreferrer" class="w-full text-center bg-gray-800 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-black transition-colors duration-300">Liverpool</a>
+                <a href="https://www.elpalaciodehierro.com/celebra/resultado-de-busqueda/evento/1234567" target="_blank" rel="noopener noreferrer" class="w-full text-center bg-gray-800 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-black transition-colors duration-300">Palacio de Hierro</a>
+            </div>
+        </section>
+
+        <footer class="text-center py-8 text-gray-500 text-sm"><p>Maritza & Jaime © 2026</p></footer>
+    </div>
+
+    <!-- Loading / Status Messages -->
+    <div id="status-container" class="min-h-screen flex flex-col items-center justify-center text-center p-6">
+        <div id="loader" class="loader"></div>
+        <p id="status-message" class="mt-4 text-lg text-gray-700">Cargando invitación...</p>
+    </div>
+
+    <!-- Modal for Confirmation -->
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
+        <div class="modal-content bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div id="form-content" class="p-8 relative">
+                <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-3xl leading-none">×</button>
+                <h3 class="font-serif text-2xl text-black mb-4">Confirmar Asistencia</h3>
+                <p class="text-gray-600 mb-6">Por favor, introduce los nombres completos de los asistentes.</p>
+                <form id="confirmationForm">
+                    <div id="guest-inputs-container" class="space-y-4 mb-6"></div>
+                    <button type="submit" class="w-full bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800">Enviar Confirmación</button>
+                </form>
+            </div>
+            <div id="success-message" class="hidden p-8 text-center">
+                 <h3 class="font-serif text-2xl text-black mb-4">¡Gracias!</h3>
+                 <p class="text-gray-600 mb-6">Hemos recibido tu confirmación. ¡Nos vemos en la boda!</p>
+                 <button id="closeSuccessBtn" class="w-full bg-gray-700 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-600">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Using modular Firebase SDK -->
+    <script type="module">
+        // Import functions from the Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // ******************************************************************
+        // ** ACCIÓN REQUERIDA: Pega tu configuración de Firebase aquí **
+        // ******************************************************************
+        // Ve a la Consola de Firebase -> Configuración del proyecto -> General
+        // En la sección "Tus apps", haz clic en el ícono de web </>
+        // Copia el objeto de configuración y pégalo aquí.
+        const firebaseConfig = {
+            apiKey: "AIzaSyAOwGMwUKJ8Poup51q8_mXty4-oLe9eGO0",
+            authDomain: "boda-martiza-jaime.firebaseapp.com",
+            projectId: "boda-martiza-jaime",
+            storageBucket: "boda-martiza-jaime.firebasestorage.app",
+            messagingSenderId: "106564189041",
+            appId: "1:106564189041:web:55b6054892b28894bb14d0"
+        };
+        // ******************************************************************
+
+        // --- DOM Elements ---
+        const mainContent = document.getElementById('main-content');
+        const statusContainer = document.getElementById('status-container');
+        const loader = document.getElementById('loader');
+        const statusMessage = document.getElementById('status-message');
+        const passesContainer = document.getElementById('passes-container');
+        const confirmationActionContainer = document.getElementById('confirmation-action-container');
+        
+        // Modal elements
+        const modal = document.getElementById('confirmationModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+        const confirmationForm = document.getElementById('confirmationForm');
+        const guestInputsContainer = document.getElementById('guest-inputs-container');
+        const formContent = document.getElementById('form-content');
+        const successMessage = document.getElementById('success-message');
+
+        let db;
+        let currentInvitationId = null;
+        let passesAllocated = 0;
+
+        // --- Main Function ---
+        async function initializeAppAndData() {
+            try {
+                // **NEW**: Validate the firebaseConfig before using it
+                if (!firebaseConfig || firebaseConfig.apiKey.includes("...")) {
+                    showStatus("ACCIÓN REQUERIDA: Debes pegar tu configuración de Firebase en el código HTML. Revisa la sección de comentarios en el script.", true);
+                    return;
+                }
+
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                db = getFirestore(app);
+
+                await signInAnonymously(auth);
+
+                const params = new URLSearchParams(window.location.search);
+                currentInvitationId = params.get('invitacion');
+
+                if (!currentInvitationId) {
+                    showStatus("Acceso no válido. Se requiere una invitación personal.", true);
+                    return;
+                }
+                
+                const docRef = doc(db, 'invitations', currentInvitationId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const invitationData = docSnap.data();
+                    passesAllocated = invitationData.passesAllocated || 0;
+                    
+                    displayInvitation(invitationData);
+                    statusContainer.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+                } else {
+                    showStatus("Invitación no encontrada. Por favor, verifica tu enlace.", true);
+                }
+
+            } catch (error) {
+                console.error("Firebase Initialization Error:", error);
+                if (error.code === "auth/api-key-not-valid") {
+                     showStatus("Error de configuración: La clave de API de Firebase no es válida. Por favor, verifica tu configuración.", true);
+                } else {
+                     showStatus("Ocurrió un error al cargar la invitación. Por favor, intenta de nuevo.", true);
+                }
+            }
+        }
+
+        // --- UI Updates ---
+        function displayInvitation(data) {
+            passesContainer.textContent = `${data.passesAllocated} ${data.passesAllocated === 1 ? 'pase' : 'pases'}`;
+
+            if (data.status === 'Confirmado') {
+                confirmationActionContainer.innerHTML = `
+                    <div class="text-center bg-green-100 text-green-800 p-4 rounded-lg max-w-md mx-auto">
+                        <p class="font-semibold">¡Gracias por confirmar!</p>
+                        <p class="mt-2">Tu asistencia ha sido registrada para: <br><strong>${data.confirmedGuests.join(', ')}</strong></p>
+                        <p class="mt-2">¡Nos vemos en la boda!</p>
+                    </div>`;
+            } else {
+                confirmationActionContainer.innerHTML = `
+                    <button id="openModalBtn" class="bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800 transition-all duration-300 transform hover:scale-105">
+                        Confirmar Asistencia
+                    </button>`;
+                document.getElementById('openModalBtn').addEventListener('click', openModal);
+            }
+        }
+
+        function showStatus(message, isError = false) {
+            mainContent.classList.add('hidden');
+            statusContainer.classList.remove('hidden');
+            statusMessage.textContent = message;
+            if (isError) {
+                loader.classList.add('hidden');
+                statusMessage.classList.add('text-red-600');
+            }
+        }
+
+        // --- Modal Logic ---
+        function openModal() {
+            createGuestInputs(passesAllocated);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => modal.classList.add('modal-visible'), 10);
+        }
+
+        function closeModal() {
+            modal.classList.remove('modal-visible');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                successMessage.classList.add('hidden');
+                formContent.classList.remove('hidden');
+            }, 300);
+        }
+        
+        function createGuestInputs(count) {
+            guestInputsContainer.innerHTML = '';
+            for (let i = 1; i <= count; i++) {
+                guestInputsContainer.innerHTML += `
+                    <div>
+                        <label for="guest-${i}" class="block text-sm font-medium text-gray-700 mb-1 text-left">Nombre del Asistente ${i}</label>
+                        <input type="text" id="guest-${i}" name="guestName" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" placeholder="Nombre completo" required>
+                    </div>`;
+            }
+        }
+
+        // --- Form Submission ---
+        async function handleConfirmationSubmit(event) {
+            event.preventDefault();
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+
+            const nameInputs = guestInputsContainer.querySelectorAll('input[name="guestName"]');
+            const confirmedGuests = Array.from(nameInputs).map(input => input.value.trim()).filter(name => name);
+            
+            let allValid = true;
+            nameInputs.forEach(input => {
+                if(!input.value.trim()){
+                    input.classList.add('border-red-500');
+                    allValid = false;
+                } else {
+                    input.classList.remove('border-red-500');
+                }
+            });
+
+            if (!allValid || confirmedGuests.length === 0) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar Confirmación';
+                return;
+            }
+
+            try {
+                const docRef = doc(db, 'invitations', currentInvitationId);
+                await updateDoc(docRef, {
+                    status: 'Confirmado',
+                    confirmedGuests: confirmedGuests,
+                    confirmedAt: Timestamp.now()
+                });
+                formContent.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+            } catch (error) {
+                console.error("Error updating document: ", error);
+                alert("Hubo un error al enviar tu confirmación. Por favor, intenta de nuevo.");
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar Confirmación';
+            }
+        }
+        
+        // --- Event Listeners ---
+        closeModalBtn.addEventListener('click', closeModal);
+        closeSuccessBtn.addEventListener('click', () => {
+            closeModal();
+            location.reload(); // Reload the page to show the confirmed status
+        });
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        confirmationForm.addEventListener('submit', handleConfirmationSubmit);
+
+        // --- Start the app ---
+        document.addEventListener('DOMContentLoaded', initializeAppAndData);
+    </script>
+</body>
+</html>
