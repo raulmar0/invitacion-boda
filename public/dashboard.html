@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Boda</title>
+    <title>Panel de Boda | Maritza & Jaime</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -63,7 +63,7 @@
     <div id="dashboard-content" class="hidden">
         <header class="bg-white shadow-sm">
             <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                <h1 class="text-2xl md:text-3xl font-bold font-serif text-gray-900">Panel de Boda</h1>
+                <h1 class="text-2xl md:text-3xl font-bold font-serif text-gray-900">Panel de Boda de Maritza & Jaime</h1>
                 <button id="logout-btn" class="text-sm text-gray-600 hover:text-black underline">Cerrar Sesión</button>
             </div>
             <nav class="border-b border-gray-200">
@@ -170,14 +170,14 @@
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getFirestore, collection, getDocs, addDoc, serverTimestamp, doc, updateDoc, deleteDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // --- Your Firebase Configuration ---
+        // --- Firebase Configuration ---
         const firebaseConfig = {
-            apiKey: "AIzaSyCGAQvdtAXnl0SgPVOGIyDz-jgD6PV2BNs",
-            authDomain: "boda-maritza-jaime.firebaseapp.com",
-            projectId: "boda-maritza-jaime",
-            storageBucket: "boda-maritza-jaime.firebasestorage.app",
-            messagingSenderId: "133583008865",
-            appId: "1:133583008865:web:01ab3f7879e90355726620"
+            apiKey: "AIzaSyAOwGMwUKJ8Poup51q8_mXty4-oLe9eGO0",
+            authDomain: "boda-martiza-jaime.firebaseapp.com",
+            projectId: "boda-martiza-jaime",
+            storageBucket: "boda-martiza-jaime.firebasestorage.app",
+            messagingSenderId: "106564189041",
+            appId: "1:106564189041:web:55b6054892b28894bb14d0"
         };
         
         // --- DOM Elements ---
@@ -230,14 +230,19 @@
 
         // --- Auth State Management ---
         onAuthStateChanged(auth, (user) => {
-            if (user) {
+            if (user && !user.isAnonymous) {
+                // User is signed in with email/password.
                 loginModal.classList.add('hidden');
                 dashboardContent.classList.remove('hidden');
                 loadGuests();
                 loadEventDetails();
             } else {
+                // User is signed out or is anonymous.
                 loginModal.classList.remove('hidden');
                 dashboardContent.classList.add('hidden');
+                if (user && user.isAnonymous) {
+                    signOut(auth);
+                }
             }
         });
 
@@ -498,7 +503,7 @@
             const id = editGuestIdInput.value;
             if (!id) return;
 
-            const invitationUrl = `https://boda-maritza-jaime.web.app/?invitacion=${id}`;
+            const invitationUrl = `https://boda-martiza-jaime.web.app/?invitacion=${id}`;
             navigator.clipboard.writeText(invitationUrl).then(() => {
                 const tooltip = e.target.querySelector('.tooltip');
                 tooltip.classList.add('visible');

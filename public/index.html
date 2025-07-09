@@ -122,7 +122,7 @@
     </div>
 
     <!-- Modal for Confirmation -->
-    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"><div class="modal-content bg-white rounded-lg shadow-xl max-w-md w-full"><div id="form-content" class="p-8 relative"><button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-3xl leading-none">×</button><h3 class="font-serif text-2xl text-black mb-4">Confirmar Asistencia</h3><p class="text-gray-600 mb-6">Por favor, introduce los nombres de los asistentes.</p><form id="confirmationForm"><div id="guest-inputs-container" class="space-y-4 mb-4"></div><p id="confirmation-error" class="text-red-500 text-sm mb-4 hidden"></p><button type="submit" class="w-full bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800">Enviar Confirmación</button></form></div><div id="success-message" class="hidden p-8 text-center"><h3 class="font-serif text-2xl text-black mb-4">¡Gracias!</h3><p class="text-gray-600 mb-6">Hemos recibido tu confirmación. ¡Nos vemos en la boda!</p><button id="closeSuccessBtn" class="w-full bg-gray-700 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-600">Cerrar</button></div></div></div>
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"><div class="modal-content bg-white rounded-lg shadow-xl max-w-md w-full"><div id="form-content" class="p-8 relative"><button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-3xl leading-none">×</button><h3 class="font-serif text-2xl text-black mb-4">Confirmar Asistencia</h3><p class="text-gray-600 mb-6">Por favor, selecciona quiénes asistirán.</p><form id="confirmationForm"><div id="guest-inputs-container" class="space-y-4 mb-4"></div><p id="confirmation-error" class="text-red-500 text-sm mb-4 hidden"></p><button type="submit" class="w-full bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800">Enviar Confirmación</button></form></div><div id="success-message" class="hidden p-8 text-center"><h3 class="font-serif text-2xl text-black mb-4">¡Gracias!</h3><p class="text-gray-600 mb-6">Hemos recibido tu confirmación. ¡Nos vemos en la boda!</p><button id="closeSuccessBtn" class="w-full bg-gray-700 text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-600">Cerrar</button></div></div></div>
     
     <!-- Using modular Firebase SDK -->
     <script type="module">
@@ -143,8 +143,6 @@
         // --- DOM Elements ---
         const mainContent = document.getElementById('main-content');
         const statusContainer = document.getElementById('status-container');
-        const loader = document.getElementById('loader');
-        const statusMessage = document.getElementById('status-message');
         const passesContainer = document.getElementById('passes-container');
         const confirmationActionContainer = document.getElementById('confirmation-action-container');
         
@@ -160,7 +158,6 @@
 
         let db;
         let currentInvitationId = null;
-        let passesAllocated = 0;
 
         // --- Main Function ---
         async function initializeAppAndData() {
@@ -189,7 +186,6 @@
 
                 if (invitationSnap.exists()) {
                     const invitationData = invitationSnap.data();
-                    passesAllocated = invitationData.passesAllocated || 0;
                     displayInvitationStatus(invitationData);
                     statusContainer.classList.add('hidden');
                     mainContent.classList.remove('hidden');
@@ -272,9 +268,8 @@
             }
         }
 
-        // --- UI Updates ---
         function displayInvitationStatus(data) {
-            passesContainer.textContent = `${passesAllocated} ${passesAllocated === 1 ? 'pase' : 'pases'}`;
+            passesContainer.textContent = `${data.passesAllocated} ${data.passesAllocated === 1 ? 'pase' : 'pases'}`;
 
             if (data.status === 'Confirmado') {
                 confirmationActionContainer.innerHTML = `
@@ -288,23 +283,23 @@
                     <button id="openModalBtn" class="bg-black text-white py-3 px-8 rounded-full font-semibold uppercase tracking-wider hover:bg-gray-800 transition-all duration-300 transform hover:scale-105">
                         Confirmar Asistencia
                     </button>`;
-                document.getElementById('openModalBtn').addEventListener('click', openModal);
+                document.getElementById('openModalBtn').addEventListener('click', () => openModal(data.guestNames));
             }
         }
 
         function showStatus(message, isError = false) {
             mainContent.classList.add('hidden');
             statusContainer.classList.remove('hidden');
-            statusMessage.textContent = message;
+            document.getElementById('status-message').textContent = message;
             if (isError) {
-                loader.classList.add('hidden');
-                statusMessage.classList.add('text-red-600');
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('status-message').classList.add('text-red-600');
             }
         }
 
         // --- Modal Logic ---
-        function openModal() {
-            createGuestInputs(passesAllocated);
+        function openModal(guestNames) {
+            createGuestInputs(guestNames);
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => modal.classList.add('modal-visible'), 10);
@@ -321,15 +316,19 @@
             }, 300);
         }
         
-        function createGuestInputs(count) {
+        function createGuestInputs(names) {
             guestInputsContainer.innerHTML = '';
-            for (let i = 1; i <= count; i++) {
-                guestInputsContainer.innerHTML += `
-                    <div>
-                        <label for="guest-${i}" class="block text-sm font-medium text-gray-700 mb-1 text-left">Nombre del Asistente ${i}</label>
-                        <input type="text" id="guest-${i}" name="guestName" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black" placeholder="Nombre completo">
-                    </div>`;
+            if (!Array.isArray(names) || names.length === 0) {
+                guestInputsContainer.innerHTML = '<p class="text-gray-600">No hay nombres de invitados asociados a esta invitación.</p>';
+                return;
             }
+            names.forEach((name, index) => {
+                guestInputsContainer.innerHTML += `
+                    <label for="guest-${index}" class="flex items-center p-3 rounded-md hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" id="guest-${index}" name="guestConfirm" value="${name}" class="h-5 w-5 rounded border-gray-300 text-black focus:ring-black">
+                        <span class="ml-3 block text-lg text-gray-800">${name}</span>
+                    </label>`;
+            });
         }
 
         // --- Form Submission ---
@@ -340,17 +339,12 @@
             submitButton.textContent = 'Enviando...';
             confirmationErrorEl.classList.add('hidden');
 
-            const nameInputs = guestInputsContainer.querySelectorAll('input[name="guestName"]');
-            nameInputs.forEach(input => input.classList.remove('border-red-500'));
-
-            const confirmedGuests = Array.from(nameInputs)
-                .map(input => input.value.trim())
-                .filter(name => name);
+            const checkedInputs = guestInputsContainer.querySelectorAll('input[name="guestConfirm"]:checked');
+            const confirmedGuests = Array.from(checkedInputs).map(input => input.value);
             
             if (confirmedGuests.length === 0) {
-                confirmationErrorEl.textContent = 'Por favor, introduce el nombre de al menos un asistente.';
+                confirmationErrorEl.textContent = 'Por favor, selecciona al menos un asistente.';
                 confirmationErrorEl.classList.remove('hidden');
-                nameInputs.forEach(input => input.classList.add('border-red-500'));
                 submitButton.disabled = false;
                 submitButton.textContent = 'Enviar Confirmación';
                 return;
@@ -379,7 +373,7 @@
         closeModalBtn.addEventListener('click', closeModal);
         closeSuccessBtn.addEventListener('click', () => {
             closeModal();
-            location.reload(); // Reload the page to show the confirmed status
+            location.reload(); 
         });
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
         confirmationForm.addEventListener('submit', handleConfirmationSubmit);
